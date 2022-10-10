@@ -10,3 +10,10 @@
                (:file "lite-utility")
                (:file "paren-css-lite")))
 
+(asdf:defsystem :css-lite/test
+  :serial t
+  :depends-on ("fiveam" "css-lite")
+  :pathname "test/"
+  :components ((:file "package")
+               (:file "css-lite"))
+  :perform (test-op (o c) (symbol-call :fiveam '#:run! :css-lite)))
