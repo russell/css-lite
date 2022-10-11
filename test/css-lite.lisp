@@ -193,3 +193,32 @@ baz:biff;
             ((:foo) ()
              ((:bar)
               (:baz "biff"))))))
+
+(def-test media-rules ()
+  (css-is "
+:root {
+--background-color:#fff;
+--text-color:#000;
+--highlight-color:#333;
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+--background-color:#000;
+--text-color:#fff;
+--highlight-color:#aaa;
+}
+
+}
+"
+          '(css
+            ((":root")
+             (:--background-color "#fff"
+              :--text-color "#000"
+              :--highlight-color "#333"))
+            (("@media (prefers-color-scheme: dark)")
+             ()
+             ((":root")
+              (:--background-color "#000"
+               :--text-color "#fff"
+               :--highlight-color "#aaa"))))))
