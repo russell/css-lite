@@ -182,3 +182,14 @@ border:1px solid red;
                  :height "50px" my-css-var my-favorite-border-var)
                 (("li")
                  (:width "50px" my-css-var my-favorite-border-var)))))))
+
+(def-test css-ommit-empty-rules ()
+  (css-is "
+foo bar {
+baz:biff;
+}
+"
+          '(css
+            ((:foo) ()
+             ((:bar)
+              (:baz "biff"))))))
